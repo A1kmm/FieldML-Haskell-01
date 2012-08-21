@@ -5,6 +5,12 @@ import qualified Data.Set as Set
 
 type Label = String
 
+-- | FieldML represents the fields and domains defined in a FieldML file.
+data FieldML = FieldML { fieldmlDomain :: [(String, FSet)], -- ^ All domains being defined.
+                         fieldmlFields :: [String],         -- ^ All fields being defined.
+                         fieldmlExpressions :: [Expression] -- ^ All expressions.
+                       }
+
 -- | SetOfLabels is like an ensemble in FieldML, integer labels and their decimal string equivalent are considered to be identical labels.
 data SetOfLabels = 
 
