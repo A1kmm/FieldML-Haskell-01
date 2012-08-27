@@ -132,10 +132,19 @@ data Expression =
   -- For example Cast (RealConstant 1.5) m1 if m1 was the subset of non-negative Reals.
   Cast Expression FSet |
 
+  -- | Constructs a tuple from the parts.
   Tuple [Expression] |
 
   -- | Project n x assumes x is a Tuple, and represents the n'th factor of the tuple.
   Project Int Expression |
+
+  -- | Constructs a member of a disjoint union
+  DisjointUnionValue ValueFromSetOfLabels Expression |
+
+  -- | Evaluates a disjoint union expressions (first argument) by using a different expression depending on the disjoint union
+  --   labels. The Expressions in the tuples in the second argument must be fields / lambdas that take the value of the FSet
+  --   for those labels in the disjoint union, and must all have the same co-domain (which is the co-domain of the result).
+  EvaluateDisjointUnion Expression [(SetOfLabels, Expression)]
 
   -- | Lambda x expr represents a lambda, binding x in the expression represented by expr.
   -- Thus, if g = Lambda x expr, x has been bound, and if x was a free variable in expr, it is not a free variable in g.
